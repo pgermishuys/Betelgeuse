@@ -18,4 +18,4 @@ jobs:
     steps:
       - name: Perform Release 
         run: |
-          echo "operating system: ${{ matrix.type }}"
+          echo "operating system: ${{ matrix.type.packages[0] }}"
