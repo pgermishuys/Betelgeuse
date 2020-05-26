@@ -1,75 +1,35 @@
 name: Initiate Release
  
 on:
-  push:
-    tags:
-      - "v*"
+  push
+    # tags:
+    #   - "v*"
 
 jobs:
   release:
     strategy:
       matrix:
-        item: [{
-          os: ubuntu16,
-          type: [deb],
-          sku: [oss, commercial]
-        }]
-        # os: [ubuntu16, ubuntu18, amazon-linux2, oracle-linux2, centos7, windows]
-        # package-type: [deb, rpm, tarball, zip, chocolatey]
-        # sku: [oss, commercial]
-        # exclude:
-        #   #Ubuntu 16
-        #   - os: ubuntu16
-        #     package-type: rpm
-        #   - os: ubuntu16
-        #     package-type: zip
-        #   - os: ubuntu16
-        #     package-type: chocolatey
-        #   #Ubuntu 18
-        #   - os: ubuntu18
-        #     package-type: rpm
-        #   - os: ubuntu18
-        #     package-type: zip
-        #   - os: ubuntu18
-        #     package-type: chocolatey
-        #   #Windows
-        #   - os: windows
-        #     package-type: deb
-        #   - os: windows
-        #     package-type: rpm
-        #   - os: windows
-        #     package-type: tarball
-        #   #Amazon Linux 2
-        #   - os: amazon-linux2
-        #     package-type: deb
-        #   - os: amazon-linux2
-        #     package-type: tarball
-        #   - os: amazon-linux2
-        #     package-type: zip
-        #   - os: amazon-linux2
-        #     package-type: chocolatey
-        #   #Oracle Linux 2
-        #   - os: oracle-linux2
-        #     package-type: deb
-        #   - os: oracle-linux2
-        #     package-type: tarball
-        #   - os: oracle-linux2
-        #     package-type: zip
-        #   - os: oracle-linux2
-        #     package-type: chocolatey
-        #   #CentOS7
-        #   - os: centos7
-        #     package-type: deb
-        #   - os: centos7
-        #     package-type: tarball
-        #   - os: centos7
-        #     package-type: zip
-        #   - os: centos7
-        #     package-type: chocolatey
+        sku: [
+        'ubuntu16;deb;oss',
+        'ubuntu16;deb;commercial',
+        'ubuntu18;deb;oss',
+        'ubuntu18;deb;commercial',
+        'windows10;zip;oss',
+        'windows10;chocolatey;oss',
+        'windows10;zip;commercial',
+        'amazon-linux2;rpm;commercial',
+        'oracle-linux2;rpm;commercial',
+        'centos7;rpm;commercial',
+        ]
     runs-on: ubuntu-latest
+    
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Perform Release 
+        shell: pwsh
         run: |
-          echo "O/S: ${{ matrix.item.os }}" \
-          && echo "Type: ${{ matrix.item.type }}" \
-          && echo "Sku: ${{ matrix.item.sku }}"
+          $os,$type,$sku = "${{ matrix.sku }}".Split(';');
+          Write-Host "Operating System: $($os)"
+          Write-Host "Type : $($type)"
+          Write-Host "Sku : $($sku)"
