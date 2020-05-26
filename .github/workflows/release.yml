@@ -12,6 +12,17 @@ jobs:
         os: [ubuntu16, ubuntu18, amazon-linux2, oracle-linux2, centos7, windows]
         package-type: [deb, rpm, tarball, zip, chocolatey]
         sku: [oss, commercial]
+        exclude:
+          - os: ubuntu16
+            package-type: [rpm, zip, chocolatey]
+          - os: ubuntu18
+            package-type: [rpm, zip, chocolatey]
+          - os: windows
+            package-type: [deb, rpm, tarball]
+          - os: amazon-linux2
+            package-type: [deb, tarball, zip, chocolatey]
+          - os: oracle-linux2
+            package-type: [deb, tarball, zip, chocolatey]
     runs-on: ubuntu-latest
     steps:
       - name: Perform Release 
