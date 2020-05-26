@@ -13,6 +13,18 @@ jobs:
           os: ubuntu16,
           type: [deb],
           sku: [oss, commercial]
+        },{
+          os: ubuntu18,
+          type: [deb],
+          sku: [oss, commercial]
+        },{
+          os: amazon-linux2,
+          type: [rpm],
+          sku: [oss, commercial]
+        },{
+          os: windows,
+          type: [zip, chocolatey],
+          sku: [oss, commercial]
         }]
         # os: [ubuntu16, ubuntu18, amazon-linux2, oracle-linux2, centos7, windows]
         # package-type: [deb, rpm, tarball, zip, chocolatey]
