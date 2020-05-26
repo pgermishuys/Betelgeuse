@@ -9,9 +9,13 @@ jobs:
   release:
     strategy:
       matrix:
-        type: [ubuntu16.04, ubuntu18.04]
+        type: [ubuntu16: {
+          packages: [oss, commercial]
+        }, ubuntu18: {
+          packages: [oss, commercial]
+        }]
     runs-on: ubuntu-latest
     steps:
       - name: Perform Release 
         run: |
-          echo ${{ matrix.type }}
+          echo "operating system: ${{ matrix.type }}"
