@@ -9,13 +9,13 @@ jobs:
   release:
     strategy:
       matrix:
-        type: [ubuntu16: {
-          packages: [oss, commercial]
-        }, ubuntu18: {
-          packages: [oss, commercial]
-        }]
+        os: [ubuntu16, ubuntu18, amazon-linux2, oracle-linux2, centos7, windows]
+        package-type: [deb, rpm, tarball, zip, chocolatey]
+        sku: [oss, commercial]
     runs-on: ubuntu-latest
     steps:
       - name: Perform Release 
         run: |
-          echo "operating system: ${{ matrix.type.packages[0] }}"
+          echo "operating system: ${{ matrix.os }}" \
+          && echo "operating system: ${{ matrix.package-type }}" \
+          && echo "operating system: ${{ matrix.sku }}"
